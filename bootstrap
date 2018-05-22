@@ -1,0 +1,17 @@
+#!/bin/sh
+git submodule update --init --recursive
+python3 -m venv ./env
+. env/bin/activate
+pip install numpy scipy tensorflow
+
+mkdir ./ext/tocha/_build
+cd ./ext/tocha/_build
+cmake ..
+make
+cd ../../../
+
+mkdir _build
+cd _build
+cmake ..
+make
+cd ..
