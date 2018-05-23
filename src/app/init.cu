@@ -4,7 +4,10 @@
 #include <vector>
 #include "instruction.hh"
 #include "runtime.hh"
-#include "../ops/vadd.hh"
+#include "mode.hh"
+
+#include "../ops_cpu/vadd.hh"
+#include "../ops_gpu/vadd.hh"
 
 
 namespace
@@ -42,7 +45,10 @@ namespace
         assert(b);
         assert(out);
 
-        op_vadd(a->gdata, b->gdata, out->gdata, a->size);
+        if (arch_mode == MODE_CPU)
+            cpu::op_vadd(a->gdata, b->gdata, out->gdata, a->size);
+        else
+            gpu::op_vadd(a->gdata, b->gdata, out->gdata, a->size);
     }
 
 }

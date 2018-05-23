@@ -14,14 +14,20 @@ set(CUFLOW_SRC
   src/app/init.hh
   src/app/instruction.cu
   src/app/instruction.hh
+  src/app/main.cu
+  src/app/memory.hh
+  src/app/memory.hxx
+  src/app/mode.hh
+  src/app/mode.cu
   src/app/runtime.cu
   src/app/runtime.hh
   src/app/tensor.hh
 
-  src/ops/vadd.hh
-  src/ops/vadd.cu
+  src/ops_cpu/vadd.hh
+  src/ops_cpu/vadd.cu
 
-  src/app/main.cu
+  src/ops_gpu/vadd.hh
+  src/ops_gpu/vadd.cu
 )
 add_executable(cuflow ${CUFLOW_SRC})
 target_link_libraries(cuflow ${ZLIB_LIBRARIES})

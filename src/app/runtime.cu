@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include "instruction.hh"
+#include "memory.hh"
 
 
 Runtime::Runtime(const std::string& cmd_path,
@@ -21,11 +22,11 @@ Runtime::~Runtime()
 {
     for (auto it : inputs_)
     {
-        cudaFree(it.second.gdata);
+        vect_free(it.second.gdata);
     }
     for (auto it : outputs_)
     {
-        cudaFree(it.second.gdata);
+        vect_free(it.second.gdata);
     }
 }
 
@@ -54,7 +55,7 @@ void Runtime::run()
         assert(t);
 
         auto& tdata = tout_.arr()[i];
-        cudaMemcpy(t->cdata, t->gdata, t->size * sizeof(float), cudaMemcpyDeviceToHost);        
+        vect_read(t->gdata, t->gdata + t->size, t->cdata); 
     }
 
     tout_.save(out_path_);
@@ -77,9 +78,8 @@ void Runtime::add_input(const std::string& name,
 {
     auto& tdata = tin_.arr()[inputs_list_.size()];
     float* cdata = reinterpret_cast<float*>(tdata.data);
-    float* gdata;
-    cudaMalloc(&gdata, tdata.total_len * sizeof(float));
-    cudaMemcpy(gdata, cdata, tdata.total_len * sizeof(float), cudaMemcpyHostToDevice);
+    float* gdata = vect_alloc<float>(tdata.total_len);
+    vect_write(cdata, cdata + tdata.total_len, gdata);
 
     test = gdata;
 
@@ -106,8 +106,7 @@ void Runtime::add_output(const std::string& name,
     auto& tdata = tout_.arr()[outputs_list_.size()];
 
     float* cdata = reinterpret_cast<float*>(tdata.data);
-    float* gdata;
-    cudaMalloc(&gdata, tdata.total_len * sizeof(float));
+    float* gdata = vect_alloc<float>(tdata.total_len);
 
     Tensor t(shape, cdata, gdata);
     outputs_.insert({name, t});

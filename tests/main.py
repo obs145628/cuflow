@@ -16,7 +16,14 @@ CHECK_BIN = os.path.join(TEST_DIR, 'check.py')
 
 builder = json_ts_builder.JsonTsBuilder()
 
-def add_test(cat, sub, cmd):
+def add_test(cat, sub, cmd, mode = None):
+
+    if mode is None:
+        add_test(cat, sub, cmd, 'CPU')
+        add_test(cat, sub, cmd, 'GPU')
+        return
+
+    cat = mode.lower() + '_' + cat
 
     builder.add_test(cat, sub,
                 cmd = [
@@ -27,10 +34,15 @@ def add_test(cat, sub, cmd):
                     ROOT_DIR,
                     BUILD_DIR
                 ],
+                env = {
+                    'ARCH_MODE': mode
+                },
                 code = 0)
 
 
 add_test('ops', 'vadd1', 'i,a,14;i,b,14;o,y,14;vadd,a,b,y')
+add_test('ops', 'vadd2', 'i,a,14,7;i,b,14,7;o,y,14,7;vadd,a,b,y')
+add_test('ops', 'vadd3', 'i,a,14,7,9;i,b,14,7,9;o,y,14,7,9;vadd,a,b,y')
 
 ts = json_ts_reader.JsonTsReader(builder.tests, True).ts
 if not os.path.isfile(ERRORS_PATH):
