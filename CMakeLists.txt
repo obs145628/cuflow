@@ -1,10 +1,7 @@
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 project(cuflow LANGUAGES CXX CUDA)
 
-#find_package(CUDA)
-
 set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS}")
-#set(CMAKE_CXX_FLAGS "-fPIC")
 
 include_directories(ext/tocha/include)
 find_package(ZLIB REQUIRED)
