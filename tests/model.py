@@ -92,3 +92,19 @@ class Model:
         print('Execute tf.add')
         res = tf.add(self.input(args[1]), self.input(args[2]))
         self.set_output(args[3], res)
+
+    def cmd_matmul(self, args):
+        print('Execute tf.matmul')
+        res = tf.matmul(self.input(args[1]), self.input(args[2]))
+        self.set_output(args[3], res)
+
+    def cmd_softmax(self, args):
+        print('Execute tf.nn.softmax')
+        res = tf.nn.softmax(self.input(args[1]))
+        self.set_output(args[2], res)
+
+    def cmd_sum(self, args):
+        print('Execute tf.reduce_sum')
+        res = tf.reduce_sum(self.input(args[1]))
+        res = tf.reshape(res, [1])
+        self.set_output(args[2], res)
