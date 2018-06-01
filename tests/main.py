@@ -39,13 +39,32 @@ def add_test(cat, sub, cmd, mode = None):
                 },
                 code = 0)
 
+
+#make sure it's working
+
+'''
+add_test('ops', 'matmul1,157', 'i,a,1,157;i,b,157,19;o,y,1,19;matmul,a,b,y')
+add_test('ops', 'matmul307,1', 'i,a,307,1;i,b,1,49;o,y,307,49;matmul,a,b,y')
+add_test('ops', 'matmul1,500', 'i,a,1,500;i,b,500,1;o,y,1,1;matmul,a,b,y')
+add_test('ops', 'matmul4', 'i,a,4,4;i,b,4,4;o,y,4,4;matmul,a,b,y')
+add_test('ops', 'matmul64', 'i,a,64,64;i,b,64,64;o,y,64,64;matmul,a,b,y')
+add_test('ops', 'matmul256', 'i,a,256,256;i,b,256,256;o,y,256,256;matmul,a,b,y')
+add_test('ops', 'matmul141,73', 'i,a,141,73;i,b,73,89;o,y,141,89;matmul,a,b,y')
+add_test('ops', 'matmul21,79', 'i,a,21,79;i,b,79,45;o,y,21,45;matmul,a,b,y')
+add_test('ops', 'matmul79,21', 'i,a,79,21;i,b,21,109;o,y,79,109;matmul,a,b,y')
+add_test('ops', 'matmul143,79', 'i,a,143,79;i,b,79,143;o,y,143,143;matmul,a,b,y')
+'''
+
+#speed tests
+add_test('ops', 'matmul512', 'i,a,512,512;i,b,512,512;o,y,512,512;matmul,a,b,y')
+add_test('ops', 'matmul1024', 'i,a,1024,1024;i,b,1024,1024;o,y,1024,1024;matmul,a,b,y')
+add_test('ops', 'matmul1417,733', 'i,a,1417,733;i,b,733,893;o,y,1417,893;matmul,a,b,y')
+add_test('ops', 'matmul733,1417', 'i,a,733,1417;i,b,1417,733;o,y,733,733;matmul,a,b,y')
+
 '''
 add_test('ops', 'vadd1', 'i,a,14;i,b,14;o,y,14;vadd,a,b,y')
 add_test('ops', 'vadd2', 'i,a,14,7;i,b,14,7;o,y,14,7;vadd,a,b,y')
 add_test('ops', 'vadd3', 'i,a,14,7,9;i,b,14,7,9;o,y,14,7,9;vadd,a,b,y')
-
-add_test('ops', 'matmul1', 'i,a,141,73;i,b,73,89;o,y,141,89;matmul,a,b,y')
-add_test('ops', 'matmul1', 'i,a,1417,733;i,b,733,893;o,y,1417,893;matmul,a,b,y')
 
 add_test('ops', 'sum1', 'i,x,1;o,y,1;sum,x,y')
 add_test('ops', 'sum2', 'i,x,2;o,y,1;sum,x,y')
@@ -75,9 +94,8 @@ add_test('ops', 'log_softmax1,12347', 'i,x,1,12347;o,y,1,12347;log_softmax,x,y')
 add_test('ops', 'log_softmax12347,1', 'i,x,12347,1;o,y,12347,1;log_softmax,x,y')
 add_test('ops', 'log_softmax327,539', 'i,x,327,539;o,y,327,539;log_softmax,x,y')
 add_test('ops', 'log_softmax812,113', 'i,x,812,113;o,y,812,113;log_softmax,x,y')
-'''
 
-'''
+
 add_test('ops', 'softmax_lcost6,4', 'i,a,6,4;i,b,6,4;o,y,1;softmax_lcost,a,b,y')
 add_test('ops', 'softmax_lcost6,6', 'i,a,6,6;i,b,6,6;o,y,1;softmax_lcost,a,b,y')
 add_test('ops', 'softmax_lcost6,8', 'i,a,6,8;i,b,6,8;o,y,1;softmax_lcost,a,b,y')
