@@ -93,6 +93,11 @@ class Model:
         res = tf.add(self.input(args[1]), self.input(args[2]))
         self.set_output(args[3], res)
 
+    def cmd_log_softmax(self, args):
+        print('Execute tf.nn.log_softmax')
+        res = tf.nn.log_softmax(self.input(args[1]))
+        self.set_output(args[2], res)
+
     def cmd_matmul(self, args):
         print('Execute tf.matmul')
         res = tf.matmul(self.input(args[1]), self.input(args[2]))
@@ -102,6 +107,15 @@ class Model:
         print('Execute tf.nn.softmax')
         res = tf.nn.softmax(self.input(args[1]))
         self.set_output(args[2], res)
+
+    def cmd_softmax_lcost(self, args):
+        print('Execute tf.nn.softmax_cross_entropy_with_logits')
+        res = tf.nn.softmax_cross_entropy_with_logits(labels=self.input(args[1]),
+                                                      logits=self.input(args[2]))
+        res = tf.reduce_mean(res)
+        res = tf.reshape(res, [1])
+        
+        self.set_output(args[3], res)
 
     def cmd_sum(self, args):
         print('Execute tf.reduce_sum')

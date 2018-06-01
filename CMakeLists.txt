@@ -22,19 +22,27 @@ set(CUFLOW_SRC
   src/app/timer.hh
   src/app/timer.cu
 
+  src/ops_cpu/log_softmax.hh
+  src/ops_cpu/log_softmax.cu
   src/ops_cpu/matmul.hh
   src/ops_cpu/matmul.cu
   src/ops_cpu/softmax.hh
   src/ops_cpu/softmax.cu
+  src/ops_cpu/softmax_lcost.hh
+  src/ops_cpu/softmax_lcost.cu
   src/ops_cpu/sum.hh
   src/ops_cpu/sum.cu
   src/ops_cpu/vadd.hh
   src/ops_cpu/vadd.cu
 
+  src/ops_gpu/log_softmax.hh
+  src/ops_gpu/log_softmax.cu
   src/ops_gpu/matmul.hh
   src/ops_gpu/matmul.cu
   src/ops_gpu/softmax.hh
   src/ops_gpu/softmax.cu
+  src/ops_gpu/softmax_lcost.hh
+  src/ops_gpu/softmax_lcost.cu
   src/ops_gpu/sum.hh
   src/ops_gpu/sum.cu
   src/ops_gpu/vadd.hh
